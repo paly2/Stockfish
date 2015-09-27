@@ -64,6 +64,11 @@ namespace {
     else if (token == "fen")
         while (is >> token && token != "moves")
             fen += token + " ";
+    else if (token == "actualpos")
+    {
+        fen = pos.fen();
+        is >> token; // Consume "moves" token if any
+    }
     else
         return;
 
