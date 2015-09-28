@@ -106,16 +106,21 @@ CheckInfo::CheckInfo(const Position& pos) {
 /// operator<<(Position) returns an ASCII representation of the position
 
 std::ostream& operator<<(std::ostream& os, const Position& pos) {
-
-  os << "\n +---+---+---+---+---+---+---+---+\n";
+  os << "     a   b   c   d   e   f   g   h\n";
+  os << "   +---+---+---+---+---+---+---+---+\n";
 
   for (Rank r = RANK_8; r >= RANK_1; --r)
   {
+      os << " " << r+1;
+      
       for (File f = FILE_A; f <= FILE_H; ++f)
           os << " | " << PieceToChar[pos.piece_on(make_square(f, r))];
 
-      os << " |\n +---+---+---+---+---+---+---+---+\n";
+      os << " | " << r+1;
+      os << "\n   +---+---+---+---+---+---+---+---+\n";
   }
+  
+  os << "     a   b   c   d   e   f   g   h\n";
 
   os << "\nFen: " << pos.fen() << "\nKey: " << std::hex << std::uppercase
      << std::setfill('0') << std::setw(16) << pos.st->key << std::dec << "\nCheckers: ";
